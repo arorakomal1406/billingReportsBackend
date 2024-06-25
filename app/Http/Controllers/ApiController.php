@@ -29,11 +29,49 @@ class ApiController extends Controller
                     'city' => $row->city,
                 ];
             }
+            $this->res['status']=true;
             $this->res['data']=$result;
             $this->res['message']='Data Retreived!';
         }    
 
-        return response()->json($this->res,$this->res['status_code']);
+        return response()->json($this->res);
+    }
 
+
+    public function invoice_view(){
+        $invoiceDetail = DB::table('invoices_status')->get();
+        
+        if ($invoiceDetail) {
+            $this->res['status']=true;
+            $this->res['data']=$invoiceDetail;
+            $this->res['message']='Data Retreived!';
+        }
+        
+        return response()->json($this->res);
+    }
+
+    public function receipt_view(){
+
+        $receiptDetail = DB::table('receipt_details')->get();
+        
+        if ($receiptDetail) {
+            $this->res['status']=true;
+            $this->res['data']=$receiptDetail;
+            $this->res['message']='Data Retreived!';
+        }
+        
+        return response()->json($this->res);
+    }
+
+    public function client_Summary(){
+        $clientSummary = DB::select('CALL GetClientSummary()');
+
+        if ($clientSummary) {
+            $this->res['status']=true;
+            $this->res['data']=$clientSummary;
+            $this->res['message']='Data Retreived!';
+        }
+        
+        return response()->json($this->res);
     }
 }

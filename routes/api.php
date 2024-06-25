@@ -11,3 +11,7 @@ use App\Http\Controllers\ApiController;
 
 
 Route::get('/person_view',[ApiController::class,'index']);
+Route::get('/invoice_view',[ApiController::class,'invoice_view']);
+Route::get('/receipt_view',[ApiController::class,'receipt_view']);
+Route::get('/client_Summary',[ApiController::class,'client_Summary']);
+

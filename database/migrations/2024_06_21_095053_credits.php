@@ -14,7 +14,10 @@ return new class extends Migration
         //
         Schema::create('credits', function (Blueprint $table) {
             $table->bigInteger('id')->default(0);
-            
+            $table->json('cast')->nullable();
+            $table->json('crew')->nullable();
+
+          
         });
     }
 
@@ -25,6 +28,5 @@ return new class extends Migration
     {
         //
         Schema::dropIfExists('credits');
-
     }
 };
