@@ -11,7 +11,7 @@ abstract class Controller
     use AuthorizesRequests, ValidatesRequests;
     public $res,$status_code,$validator;
     function __construct() {
-        $this->res = ['status'=>false,'message'=>'Invalid Request.','errors'=>[],'data'=>[],'status_code'=>200];
+        $this->res = ['status'=>false,'message'=>'Invalid Request.','errors'=>[],'dataset'=>[],'status_code'=>200];
         $this->validator = false;
     }
 

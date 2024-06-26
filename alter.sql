@@ -1,13 +1,17 @@
 DELIMITER //
 
 CREATE FUNCTION TotalInvoiced(client_id INT) RETURNS DECIMAL(10, 2)
+DETERMINISTIC
 BEGIN
     DECLARE total DECIMAL(10, 2);
-    SELECT IFNULL(SUM(amount), 0) INTO total
-    FROM invoices
-    WHERE client_id = client_id;
+    SELECT IFNULL(SUM(i.amount), 0)
+    INTO total
+    FROM invoices i
+    WHERE i.client_id = client_id;
     RETURN total;
-END //
+END//
+
+DELIMITER ;
 
 CREATE FUNCTION TotalPaid(client_id INT) RETURNS DECIMAL(10, 2)
 BEGIN

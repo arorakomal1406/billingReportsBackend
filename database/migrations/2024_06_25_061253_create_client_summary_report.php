@@ -13,15 +13,16 @@ return new class extends Migration
     {
         // Create TotalInvoiced function
         DB::unprepared("
-            CREATE FUNCTION TotalInvoiced(client_id INT) RETURNS DECIMAL(10, 2)
-            BEGIN
-                DECLARE total DECIMAL(10, 2);
-                SELECT IFNULL(SUM(i.amount), 0)
-                INTO total
-                FROM invoices i
-                WHERE i.client_id = client_id;
-                RETURN total;
-            END
+                CREATE FUNCTION TotalInvoiced(client_id INT) RETURNS DECIMAL(10, 2)
+                DETERMINISTIC
+                BEGIN
+                    DECLARE total DECIMAL(10, 2);
+                    SELECT IFNULL(SUM(i.amount), 0)
+                    INTO total
+                    FROM invoices i
+                    WHERE i.client_id = client_id;
+                    RETURN total;
+                END
         ");
 
         // Create TotalPaid function

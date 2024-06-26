@@ -10,8 +10,6 @@ class ApiController extends Controller
     //
     public function index()
     {
-        $this->res = ['status'=>false,'message'=>'Invalid Request.','errors'=>[],'data'=>[],'status_code'=>200];
-
         $result =DB::table('persons_address_view')->select('*')->get()->toArray();
 
         if(!empty($result))
@@ -30,7 +28,7 @@ class ApiController extends Controller
                 ];
             }
             $this->res['status']=true;
-            $this->res['data']=$result;
+            $this->res['dataset']=$result;
             $this->res['message']='Data Retreived!';
         }    
 
@@ -39,11 +37,11 @@ class ApiController extends Controller
 
 
     public function invoice_view(){
-        $invoiceDetail = DB::table('invoices_status')->get();
+        $invoiceDetail = DB::table('invoices_status')->paginate(10);
         
         if ($invoiceDetail) {
             $this->res['status']=true;
-            $this->res['data']=$invoiceDetail;
+            $this->res['dataset']=$invoiceDetail;
             $this->res['message']='Data Retreived!';
         }
         
@@ -52,11 +50,11 @@ class ApiController extends Controller
 
     public function receipt_view(){
 
-        $receiptDetail = DB::table('receipt_details')->get();
+        $receiptDetail = DB::table('receipt_details')->paginate(10);
         
         if ($receiptDetail) {
             $this->res['status']=true;
-            $this->res['data']=$receiptDetail;
+            $this->res['dataset']=$receiptDetail;
             $this->res['message']='Data Retreived!';
         }
         
@@ -68,7 +66,7 @@ class ApiController extends Controller
 
         if ($clientSummary) {
             $this->res['status']=true;
-            $this->res['data']=$clientSummary;
+            $this->res['dataset']=$clientSummary;
             $this->res['message']='Data Retreived!';
         }
         

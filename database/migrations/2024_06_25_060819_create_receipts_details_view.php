@@ -18,6 +18,7 @@ return new class extends Migration
                     c.name AS client_name,
                     r.client_id,
                     r.year_id,
+                    f.year_series,
                     r.document_no AS receipt_document_no,
                     SUM(r.amount) AS receipt_amount,
                     i.id AS invoice_id,
@@ -30,8 +31,10 @@ return new class extends Migration
                     invoices i ON r.invoice_id = i.id
                 LEFT JOIN
                     clients c ON r.client_id = c.id
+                JOIN
+                    financial_years f ON r.year_id = f.id
                 GROUP BY
-                    r.id, i.id, r.client_id, r.year_id, r.document_no, i.document_no, c.name
+                    r.id, i.id, r.client_id, r.year_id, r.document_no, i.document_no, c.name,f.year_series
         ");
     }
 

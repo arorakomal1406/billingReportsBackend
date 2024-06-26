@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Animate Height on Hover</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #myDiv {
+            width: 100px;
+            height: 0;
+            background-color: lightblue;
+            overflow: hidden; /* Ensure the content does not overflow */
+            transition: height 0.5s; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv">Content goes here</div>
+
+    <script>
+        $(document).ready(function() {
+            $("#myDiv").mouseenter(function() {
+                $(this).stop().animate({
+                    height: '50px'
+                }, 500); // 500 milliseconds = 0.5 second
+            }).mouseleave(function() {
+                $(this).stop().animate({
+                    height: '0px'
+                }, 500); // 500 milliseconds = 0.5 second
+            });
+        });
+    </script>
+</body>
+</html>

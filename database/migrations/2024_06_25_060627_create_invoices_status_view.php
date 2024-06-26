@@ -16,7 +16,9 @@ return new class extends Migration
             SELECT
                 i.id AS invoice_id,
                 i.client_id,
+                c.name AS client_name, -- Adding client name from clients table
                 i.year_id,
+                f.year_series,
                 i.document_no,
                 i.amount,
                 CASE
@@ -26,6 +28,11 @@ return new class extends Migration
                 END AS status
             FROM
                 invoices i
+            JOIN
+                clients c ON i.client_id = c.id -- Joining invoices with clients to get client name
+            JOIN
+                financial_years f ON i.year_id = f.id; -- Joining invoices with financial_year to get year_series
+
         ");
     }
 
