@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
 {
     //
+
+    function __construct() {
+        parent::__construct();
+    }
+
     public function index()
     {
         $result =DB::table('persons_address_view')->select('*')->get()->toArray();
@@ -34,7 +39,6 @@ class ApiController extends Controller
 
         return response()->json($this->res);
     }
-
 
     public function invoice_view(){
         $invoiceDetail = DB::table('invoices_status')->paginate(10);
